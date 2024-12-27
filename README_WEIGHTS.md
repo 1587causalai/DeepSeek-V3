@@ -1,69 +1,69 @@
-# DeepSeek-V3 Weight File Documentation
+# DeepSeek-V3 模型权重文件说明文档
 
-## New Fields in `config.json`
+## `config.json` 中的新增字段
 
-- **model_type**: Specifies the model type, which is updated to `deepseek_v3` in this release.
-- **num_nextn_predict_layers**: Indicates the number of Multi-Token Prediction (MTP) Modules. The open-sourced V3 weights include **1 MTP Module** .
-- **quantization_config**: Describes the configuration for FP8 quantization.
+- **model_type**: 模型类型，在本次发布中更新为 `deepseek_v3`
+- **num_nextn_predict_layers**: 多令牌预测模块（Multi-Token Prediction, MTP）的数量。本次开源的 V3 权重包含 **1个 MTP 模块**
+- **quantization_config**: FP8 量化配置信息
 
 ---
 
-## Weight Structure Overview
+## 权重文件结构概述
 
-The DeepSeek-V3 weight file consists of two main components: **Main Model Weights** and **MTP Modules**.
+DeepSeek-V3 权重文件主要包含两个部分：**主模型权重**和 **MTP 模块**。
 
-### 1. Main Model Weights
+### 1. 主模型权重
 
-- **Composition**:
-  - Input/output embedding layers and a complete set of 61 Transformer hidden layers.
-- **Parameter Count**:
-  - Total parameters: **671B**
-  - Activation parameters: **36.7B** (including 0.9B for Embedding and 0.9B for the output Head).
+- **组成部分**:
+  - 输入/输出嵌入层和完整的 61 层 Transformer 隐藏层
+- **参数统计**:
+  - 总参数量：**671B**
+  - 激活参数量：**36.7B**（其中包括嵌入层的 0.9B 和输出层的 0.9B）
 
-#### Structural Details
+#### 结构详情
 
-- **Embedding Layer**:
+- **嵌入层**:
   - `model.embed_tokens.weight`
-- **Transformer Hidden Layers**:
-  - `model.layers.0` to `model.layers.60`, totaling `num_hidden_layers` layers.
-- **Output Layer**:
+- **Transformer 隐藏层**:
+  - 从 `model.layers.0` 到 `model.layers.60`，共 `num_hidden_layers` 层
+- **输出层**:
   - `model.norm.weight`
   - `lm_head.weight`
 
-### 2. Multi-Token Prediction (MTP) Modules
+### 2. 多令牌预测（MTP）模块
 
-- **Composition**:
-  - Additional MTP Modules defined by the `num_nextn_predict_layers` field. In this model, the value is set to 1.
-- **Parameter Count**:
-  - Parameters: **11.5B unique parameters**, excluding the shared 0.9B Embedding and 0.9B output Head).
-  - Activation parameters: **2.4B** (including the shared 0.9B Embedding and 0.9B output Head).
+- **组成部分**:
+  - 由 `num_nextn_predict_layers` 字段定义的额外 MTP 模块，本模型中设置为 1
+- **参数统计**:
+  - 独立参数量：**11.5B**（不包括与主模型共享的 0.9B 嵌入层和 0.9B 输出层）
+  - 激活参数量：**2.4B**（包括共享的 0.9B 嵌入层和 0.9B 输出层）
 
-#### Structural Details
+#### 结构详情
 
-- **embed_tokens**: **Shares parameters** with the Embedding layer of the Main Model weights.
-- **enorm & hnorm**: RMSNorm parameters required for speculative decoding.
-- **eh_proj**: Parameters for dimensionality reduction projection on the norm results.
-- **Additional Transformer Hidden Layer**:
-  - `model.layers.61.self_attn & mlp` (structure identical to the Main Model hidden layers).
-- **shared_head**: **Shares parameters** with the output Head of the Main Model weights.
-
----
-
-### Loading Rules
-
-- **Main Model Weights**: Loaded via the `num_hidden_layers` parameter in `config.json`.
-- **MTP Modules**: Loaded via the `num_nextn_predict_layers` parameter, with layer IDs appended immediately after the Main Model hidden layers. For example:
-  - If `num_hidden_layers = 61` and `num_nextn_predict_layers = 1`, the MTP Module's layer ID is `61`.
+- **embed_tokens**: 与主模型权重的嵌入层**共享参数**
+- **enorm & hnorm**: 用于推测解码的 RMSNorm 参数
+- **eh_proj**: 用于规范化结果降维投影的参数
+- **额外的 Transformer 隐藏层**:
+  - `model.layers.61.self_attn & mlp`（结构与主模型隐藏层相同）
+- **shared_head**: 与主模型权重的输出层**共享参数**
 
 ---
 
-## FP8 Weight Documentation
+### 加载规则
 
-DeepSeek-V3 natively supports FP8 weight format with 128x128 block scaling.
+- **主模型权重**: 通过 `config.json` 中的 `num_hidden_layers` 参数加载
+- **MTP 模块**: 通过 `num_nextn_predict_layers` 参数加载，层 ID 紧接在主模型隐藏层之后。例如：
+  - 当 `num_hidden_layers = 61` 且 `num_nextn_predict_layers = 1` 时，MTP 模块的层 ID 为 `61`
 
-### FP8 Configuration
+---
 
-The FP8 weight file introduces a `quantization_config` field to describe the quantization method. Below is an example configuration:
+## FP8 权重说明
+
+DeepSeek-V3 原生支持 128x128 块缩放的 FP8 权重格式。
+
+### FP8 配置
+
+FP8 权重文件在 `quantization_config` 字段中描述了量化方法。配置示例如下：
 
 ```json
 "quantization_config": {
@@ -74,21 +74,21 @@ The FP8 weight file introduces a `quantization_config` field to describe the qua
 }
 ```
 
-- **Quantization Format**:
-  - Format type: `fp8` and `e4m3` (corresponding to `torch.float8_e4m3fn`).
-  - Weight block size: `128x128`.
-- **Activation Quantization Scheme**:
-  - Utilizes dynamic activation quantization (`dynamic`).
+- **量化格式**:
+  - 格式类型：`fp8` 和 `e4m3`（对应 `torch.float8_e4m3fn`）
+  - 权重块大小：`128x128`
+- **激活量化方案**:
+  - 使用动态激活量化（`dynamic`）
 
-### Dequantization Method
+### 反量化方法
 
-The FP8 weight file includes a `weight_scale_inv` field, which stores the dequantization scale for each weight block.
+FP8 权重文件包含 `weight_scale_inv` 字段，用于存储每个权重块的反量化比例。
 
-- **Storage Format**: `float32 Tensor`, stored alongside the weight data.
-- **Dequantization Formula**:
-  - If the weight block is not aligned to 128, it is zero-padded to 128 before calculating the scale. After quantization, the padded portion is removed.
-  - The dequantization process is performed as: `(128x128 weight block) * weight_scale_inv`.
+- **存储格式**: `float32 Tensor`，与权重数据一起存储
+- **反量化公式**:
+  - 如果权重块不是 128 的整数倍，会先用零填充到 128，计算比例后再移除填充部分
+  - 反量化过程：`(128x128 权重块) * weight_scale_inv`
 
-Through dequantization of the FP8 weights, runtime operations enable online quantization at a granularity of `per-token-per-128-channel`.
+通过 FP8 权重的反量化，运行时操作可以实现 `每个令牌每128通道` 粒度的在线量化。
 
 ---
