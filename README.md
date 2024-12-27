@@ -52,6 +52,12 @@ DeepSeek-V3 在教育基准测试上表现优异：
 2. 编程能力：在编程竞赛基准测试（如 LiveCodeBench）中表现最佳
 3. 工程任务：仅次于 Claude-Sonnet-3.5，但远超其他模型
 
+## 文档导航
+
+- [模型架构解析](training/model_structure.md)
+- [训练方法说明](training/efficient_training.md)
+- [基准测试分析](BENCHMARK_ANALYSIS.md) 
+
 ## 相关新闻
 
 ### AI 大牛评价
@@ -60,8 +66,37 @@ DeepSeek-V3 在教育基准测试上表现优异：
 - **Alexandr Wang**: 认为 DeepSeek-V3 与 GPT-4 和 Claude 3.5 Sonnet 性能相当，但计算量减少了10倍
 - **贾扬清**: 正式进入了分布式推理时代
 
-## 文档导航
 
-- [模型架构解析](training/model_structure.md)
-- [训练方法说明](training/efficient_training.md)
-- [基准测试分析](BENCHMARK_ANALYSIS.md) 
+
+
+> **Sarah Guo** (@saranomous):
+> "I don't think the US chip export controls are having their intended effect. Chinese model DeepSeek v3 very strong, and trained with OOM less money:
+> - DeepSeek-V3 requires only 2.788M H800 GPU hours for its training
+> - h800 is h100 with lower interchip bandwidth"
+
+> **Andrej Karpathy** (@karpathy):
+> "DeepSeek (Chinese AI co) making it look easy today with an open weights release of a frontier-grade LLM trained on a joke of a budget (2048 GPUs for 2 months, $6M).
+>
+> For reference, this level of capability is supposed to require clusters of closer to 16K GPUs, the ones being brought up today are more around 100K GPUs. E.g. Llama 3 405B used 30.8M GPU-hours, while DeepSeek-V3 looks to be a stronger model at only 2.8M GPU-hours (~11X less compute). If the model also passes vibe checks (e.g. LLM arena rankings are ongoing, my few quick tests went well so far) it will be a highly impressive display of research and engineering under resource constraints.
+>
+> Does this mean you don't need large GPU clusters for frontier LLMs? No but you have to ensure that you're not wasteful with what you have, and this looks like a nice demonstration that there's still a lot to get through with both data and algorithms.
+>
+> Very nice & detailed tech report too, reading through."
+
+> **Alexandr Wang**:
+> "It is quite fitting that DeepSeek, China's leading LLM lab, releases its latest model V3 on Christmas.
+> - on-par with GPT-4o & Claude 3.5 Sonnet
+> - trained w/10x less compute
+>
+> The bitter lesson of Chinese tech: they work while America rests, and catch up cheaper, faster & stronger"
+
+<div style="display: grid; grid-template-columns: 250px 400px; gap: 10px;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+        <img src="https://s2.loli.net/2024/12/27/UPqzbpxdrnfXmMj.jpg" width="300">
+        <img src="https://s2.loli.net/2024/12/27/5EtRcrTQogesaCX.jpg" width="300">
+        <img src="https://s2.loli.net/2024/12/27/isYFQtuBReE9Xg2.jpg" width="300">
+    </div>
+    <div>
+        <img src="https://s2.loli.net/2024/12/27/YetWvKuwopDS2Rx.jpg" width="400">
+    </div>
+</div>
