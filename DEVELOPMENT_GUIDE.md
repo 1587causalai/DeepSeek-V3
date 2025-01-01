@@ -21,9 +21,8 @@ DeepSeek-V3/
 - `camp4_deepseek`: 专门用于 DeepSeek-V3 项目的定制分支
 
 ### DeepSeek-V3 仓库分支
-- `main`: 主分支
-- `doc`: 文档开发分支
-- 其他功能分支根据需要创建
+- `doc`: 默认主分支，用于文档和主要开发
+- 其他功能分支根据需要从 `doc` 分支创建，命名格式：`feature/功能名称`
 
 ## 开发工作流程
 
@@ -31,9 +30,23 @@ DeepSeek-V3/
 ```bash
 # 克隆主仓库和子模块
 git clone --recurse-submodules git@github.com:1587causalai/DeepSeek-V3.git
+cd DeepSeek-V3
+
+# 初始化子模块并切换到正确的分支
+git submodule init
+git submodule update
+cd Tutorial
+git checkout camp4_deepseek
+cd ..
 
 # 如果已经克隆但没有子模块，执行：
 git submodule update --init --recursive
+cd Tutorial
+git checkout camp4_deepseek
+cd ..
+
+# 确认子模块状态
+git submodule status
 ```
 
 ### 2. Tutorial 内容开发

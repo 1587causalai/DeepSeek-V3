@@ -7,5 +7,24 @@
   * [Pretraining](training/pretraining.md)
   * [Post-Training](training/post-training.md)
 * [权重文件说明](README_WEIGHTS.md)
-* [基准测试分析](BENCHMARK_ANALYSIS.md) 
-* [双分支开发指南](DEVELOPMENT_GUIDE.md)
+* [基准测试分析](BENCHMARK_ANALYSIS.md)
+* [开发指南](DEVELOPMENT_GUIDE.md)
+* 浦语实战训练营
+  * 入门教程
+    * [Linux 基础](Tutorial/docs/L0/linux/task.md)
+    * [Python 基础](Tutorial/docs/L0/Python/task.md)
+    * [Git 基础](Tutorial/docs/L0/git/task.md)
+    * [模型服务平台](Tutorial/docs/L0/maas/task.md)
+  * 基础教程
+    * [全链路开源体系](Tutorial/docs/L1/ToolChain/README.md)
+    * [多模态对话与搜索](Tutorial/docs/L1/InternIntro/tasks.md)
+    * [提示词工程实践](Tutorial/docs/L1/Prompt/tasks.md)
+    * [RAG 实践](Tutorial/docs/L1/LlamaIndex/task.md)
+    * [模型微调实践](Tutorial/docs/L1/XTuner/task.md)
+    * [模型评测实践](Tutorial/docs/L1/Evaluation/task.md)
+  * 进阶教程
+    * [Multi-Agent 实践](Tutorial/docs/L2/Agent/task.md)
+    * [模型部署实践](Tutorial/docs/L2/LMDeploy/task.md)
+    * [多模态实践](Tutorial/docs/L2/InternVL/task.md)
+    * [知识库问答](Tutorial/docs/L2/huixiangdou/task.md)
+    * [深度搜索实践](Tutorial/docs/L2/MindSearch/task.md)
