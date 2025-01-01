@@ -1,0 +1,4 @@
+[submodule "Tutorial"]
+	path = Tutorial
+	url = git@github.com:1587causalai/Tutorial.git
+	branch = camp4
