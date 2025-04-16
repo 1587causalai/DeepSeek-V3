@@ -8,4 +8,3 @@
   * [Post-Training](training/post-training.md)
 * [权重文件说明](README_WEIGHTS.md)
 * [基准测试分析](BENCHMARK_ANALYSIS.md)
-* [开发指南](DEVELOPMENT_GUIDE.md)
