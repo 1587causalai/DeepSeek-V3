@@ -1,14 +1,5 @@
 # DeepSeek-V3: 开创性的大规模语言模型
 
-[官网](https://www.deepseek.com/) | [在线对话](https://chat.deepseek.com/) | [模型下载](https://huggingface.co/deepseek-ai) | [技术论文](DeepSeek_V3.pdf)
-
-<div align="center">
-  <p>
-    <a href="https://discord.gg/Tc7c45Zzu5">Discord社区</a> |
-    <a href="https://github.com/deepseek-ai/DeepSeek-V2/blob/main/figures/qr.jpeg?raw=true">微信社区</a> |
-    <a href="https://twitter.com/deepseek_ai">Twitter</a>
-  </p>
-</div>
 
 
 ## 1. 项目简介
